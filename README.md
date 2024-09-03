@@ -13,3 +13,11 @@ del curso 2023-2024.
 **Ejercicios**
 - [Ejercicio 1](docs/ut01/ut1-ej1.pdf)
 - [Ejercicio 3](docs/ut01/ut1-ej3.pdf)
+
+### UT-02: Arquitectura
+
+**Contenido**
+- [Presentación de la UT-02](docs/ut02/ut2.pdf)
+
+**Ejercicios**
+- [Ejercicio 1](docs/ut02/ut2-ej1.pdf)

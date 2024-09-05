@@ -8,6 +8,7 @@
     <string name="action_validate">Enviar</string>
     <string name="message_login_ok">Acceso concedido</string>
     <string name="message_login_fails">Credenciales incorrectas</string>
+    <string name="label_remember_username">¿Recordar usuario?</string>
 
 
     <!-- Other Screen  -->

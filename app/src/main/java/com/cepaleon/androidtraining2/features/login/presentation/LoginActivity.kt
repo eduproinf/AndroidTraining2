@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loginFactory = LoginFactory()
+        loginFactory = LoginFactory(this)
         loginViewModel = loginFactory.provideLoginViewModel()
         setContentView(R.layout.activity_login)
         setupView()
@@ -30,14 +31,31 @@ class LoginActivity : AppCompatActivity() {
     private fun setupView() {
         val actionValidate = findViewById<Button>(R.id.action_validate)
         actionValidate.setOnClickListener {
-            Log.d("@dev","se ha hecho clic")
+            Log.d("@dev", "se ha hecho clic")
             val username = findViewById<EditText>(R.id.input_username).text.toString()
             val password = findViewById<EditText>(R.id.input_password).text.toString()
-            val isValid: Boolean = loginViewModel.validateClicked(username, password)
+            val rememberIsChecked = findViewById<CheckBox>(R.id.rememeber_checkbox).isChecked
+            val isValid: Boolean = loginViewModel.validateClicked(username, password, rememberIsChecked)
             if (isValid) {
-                Snackbar.make(findViewById(R.id.main), R.string.message_login_ok, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(R.id.main),
+                    R.string.message_login_ok,
+                    Snackbar.LENGTH_SHORT
+                ).show()
             } else {
-                Snackbar.make(findViewById(R.id.main), R.string.message_login_fails, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(R.id.main),
+                    R.string.message_login_fails,
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
-        } }
+        }
     }
+
+    override fun onResume() {
+        super.onResume()
+        loginViewModel.onResume()?.let { username ->
+            findViewById<EditText>(R.id.input_username).setText(username)
+        }
+    }
+}
